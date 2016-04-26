@@ -1,1 +1,2 @@
-# Codeigniter-mongodb-library
+#CIMongoDB - Codeigniter-mongodb-library
+
