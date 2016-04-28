@@ -49,3 +49,4 @@ Wiki：https://fifths.github.com/mongodb-library-for-codeigniter.html
 
 ##Extra Helper
 * `date` Create or convert date to MongoDB based Date
+* `timestamp` Create or convert Timestamp to MongoDB based Timestamp
