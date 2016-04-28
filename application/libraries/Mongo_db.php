@@ -693,6 +693,7 @@ Class Mongo_db
         try {
             $options = [
                 'projection' => $this->selects,
+                "sort" => $this->sorts,
                 "skip" => 0,
                 "limit" => 1,
                 "modifiers" => array('$comment' => "This is a query comment", '$maxTimeMS' => 100)
@@ -702,7 +703,7 @@ Class Mongo_db
             $documents = $this->db->executeQuery($this->database . '.' . $collection, $query, $readPreference);
             // Clear
             $this->_clear();
-            $returns = array();
+            $returns = null;
             foreach ($documents as $document) {
                 if ($this->return_as == 'object') {
                     //$returns[] = $document;
@@ -1051,11 +1052,11 @@ Class Mongo_db
              *  * limit (integer): Deletes all matching documents when 0 (false). Otherwise,
              *    only the first matching document is deleted. */
             $options = ["limit" => 1];
-            $filter=$this->wheres;
+            $filter = $this->wheres;
             // Create a bulk write object and add our delete operation
             $bulk = new MongoDB\Driver\BulkWrite;
             $bulk->delete($filter, $options);
-            $result =  $this->db->executeBulkWrite($this->database . '.' . $collection, $bulk, $wc);
+            $result = $this->db->executeBulkWrite($this->database . '.' . $collection, $bulk, $wc);
             $this->_clear();
             return (TRUE);
         } catch (MongoDB\Driver\Exception\Exception $e) {
@@ -1104,11 +1105,20 @@ Class Mongo_db
     public function date($stamp = FALSE)
     {
         if ($stamp == FALSE) {
-            return new MongoDB\BSON\UTCDateTime(time());
+            return new MongoDB\BSON\UTCDatetime(time()*1000);
         } else {
-            return new MongoDB\BSON\UTCDateTime($stamp);
+            return new MongoDB\BSON\UTCDatetime($stamp);
         }
 
+    }
+
+    public function timestamp($stamp = FALSE)
+    {
+        if ($stamp == FALSE) {
+            return new MongoDB\BSON\Timestamp(0, time());
+        } else {
+            return new MongoDB\BSON\Timestamp(0, $stamp);
+        }
     }
 
     /**
