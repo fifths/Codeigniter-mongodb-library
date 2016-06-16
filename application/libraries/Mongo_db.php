@@ -627,7 +627,7 @@ Class Mongo_db
                 "sort" => $this->sorts,
                 "skip" => $this->offset,
                 "limit" => $this->limit,
-                "modifiers" => array('$comment' => "This is a query comment", '$maxTimeMS' => 100)
+                "modifiers" => array('$comment' => "This is a query comment")
             ];
             $query = new MongoDB\Driver\Query($this->wheres, $options);
             $readPreference = new MongoDB\Driver\ReadPreference(MongoDB\Driver\ReadPreference::RP_PRIMARY);
@@ -696,7 +696,7 @@ Class Mongo_db
                 "sort" => $this->sorts,
                 "skip" => 0,
                 "limit" => 1,
-                "modifiers" => array('$comment' => "This is a query comment", '$maxTimeMS' => 100)
+                "modifiers" => array('$comment' => "This is a query comment")
             ];
             $query = new MongoDB\Driver\Query($this->wheres, $options);
             $readPreference = new MongoDB\Driver\ReadPreference(MongoDB\Driver\ReadPreference::RP_PRIMARY);
@@ -743,7 +743,7 @@ Class Mongo_db
             "sort" => $this->sorts,
             "skip" => $this->offset,
             "limit" => $this->limit,
-            "modifiers" => array('$comment' => "This is a query comment", '$maxTimeMS' => 100)
+            "modifiers" => array('$comment' => "This is a query comment")
         ];
         $query = new MongoDB\Driver\Query($this->wheres, $options);
         $readPreference = new MongoDB\Driver\ReadPreference(MongoDB\Driver\ReadPreference::RP_PRIMARY);
