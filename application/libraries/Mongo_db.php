@@ -1035,7 +1035,7 @@ Class Mongo_db
      *
      * @usage : $this->mongo_db->delete('foo');
      */
-    public function delete($collection = "")
+    public function delete($collection = "", $limit = 1)
     {
         if (empty($collection)) {
             show_error("No Mongo collection selected to delete from", 500);
@@ -1051,7 +1051,7 @@ Class Mongo_db
              *
              *  * limit (integer): Deletes all matching documents when 0 (false). Otherwise,
              *    only the first matching document is deleted. */
-            $options = ["limit" => 1];
+            $options = ["limit" => $limit];
             $filter = $this->wheres;
             // Create a bulk write object and add our delete operation
             $bulk = new MongoDB\Driver\BulkWrite;
@@ -1105,7 +1105,7 @@ Class Mongo_db
     public function date($stamp = FALSE)
     {
         if ($stamp == FALSE) {
-            return new MongoDB\BSON\UTCDatetime(time()*1000);
+            return new MongoDB\BSON\UTCDatetime(time() * 1000);
         } else {
             return new MongoDB\BSON\UTCDatetime($stamp);
         }
